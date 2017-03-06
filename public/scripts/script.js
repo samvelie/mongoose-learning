@@ -4,7 +4,12 @@ $(document).ready(function() {
   console.log('doc ready');
   getTasks();
   $('#createTask').on('click', createTasks);
+  $('#taskDiv').on('click', '.completeTask', completeTask);
 });
+
+function completeTask() {
+  console.log('complet task button clicked');
+}
 
 // ajax function
 function getTasks() {
@@ -44,5 +49,14 @@ function appendTasks(tasks) {
 
   tasks.forEach(function(task) {
     $('#taskDiv').append('<div class="task">'+ task.name + "</div>");
+    $el = $('#taskDiv').children().last();
+
+    if(task.status){
+      // complete
+      $el.addClass("complete");
+    }else{
+      // not complete
+      $el.append('<button class="completeTask"> Complete Task </button>');
+    }
   });
 }
