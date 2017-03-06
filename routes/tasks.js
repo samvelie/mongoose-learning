@@ -18,18 +18,20 @@ router.get('/', function(req, res) {
     if(err){
       console.log(err);
       res.sendStatus(500);
-    }
-    // SELECT * FROM task;
-    client.query('SELECT * FROM task;', function(err, result) {
-      done(); // close the connection db
+    }else{
+      // SELECT * FROM task;
+      client.query('SELECT * FROM task;', function(err, result) {
+        done(); // close the connection db
 
-      if(err){
-        console.log(err);
-        res.sendStatus(500); // the world exploded
-      }
-      console.log(result.rows);
-      res.status(200).send(result.rows);
-    });
+        if(err){
+          console.log(err);
+          res.sendStatus(500); // the world exploded
+        }else{
+          console.log(result.rows);
+          res.status(200).send(result.rows);
+        }
+      });
+    }
   });
 });
 
