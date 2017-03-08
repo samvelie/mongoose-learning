@@ -15,26 +15,6 @@ myApp.config(['$routeProvider', function($routeProvider) {
     })
 }]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 myApp.controller('TaskController', ['$http', function($http){
   console.log('The TaskController was loaded');
   var self = this;
