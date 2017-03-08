@@ -93,7 +93,7 @@ router.delete('/:id', function(req, res) {
 
 
 // create a new task in the db
-router.put('/:id', function(req, res) {
+router.put('/complete/:id', function(req, res) {
   var taskToCompleteId = req.params.id;
   console.log('hit complete route');
   console.log('here is the id to complete ->', taskToCompleteId);
@@ -107,6 +107,33 @@ router.put('/:id', function(req, res) {
     }else{
       client.query('UPDATE task SET status=TRUE WHERE ID=$1;',
         [taskToCompleteId], function(err, result) {
+          done();
+          if(err){
+            console.log(err);
+            res.sendStatus(500); // the world exploded
+          }else{
+            res.sendStatus(200);
+          }
+      });
+    }
+  });
+});
+
+// create a new task in the db
+router.put('/uncomplete/:id', function(req, res) {
+  var taskToUncompleteId = req.params.id;
+  console.log('hit complete route');
+  console.log('here is the id to complete ->', taskToUncompleteId);
+
+  // db query
+  // UPDATE task SET status = TRUE WHERE ID = 4;
+  pool.connect(function(err, client, done) {
+    if(err){
+      console.log(err);
+      res.sendStatus(500);
+    }else{
+      client.query('UPDATE task SET status=FALSE WHERE ID=$1;',
+        [taskToUncompleteId], function(err, result) {
           done();
           if(err){
             console.log(err);

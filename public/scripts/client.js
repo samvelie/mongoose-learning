@@ -1,4 +1,39 @@
-var myApp = angular.module('TaskApp', []);
+var myApp = angular.module('TaskApp', ['ngRoute']);
+
+console.log(myApp);
+
+myApp.config(['$routeProvider', function($routeProvider) {
+  $routeProvider
+    .when('/home', {
+      templateUrl: '/views/home.html'
+    })
+    .when('/todoList', {
+      templateUrl: '/views/todoList.html'
+    })
+    .otherwise({
+      redirectTo: 'home'
+    })
+}]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 myApp.controller('TaskController', ['$http', function($http){
   console.log('The TaskController was loaded');
@@ -42,7 +77,16 @@ myApp.controller('TaskController', ['$http', function($http){
   self.completeTask = function(taskId) {
     $http({
       method: 'PUT',
-      url: '/tasks/' + taskId
+      url: '/tasks/complete/' + taskId
+    }).then(function(response) {
+      getTasks();
+    });
+  }
+
+  self.uncompleteTask = function(taskId) {
+    $http({
+      method: 'PUT',
+      url: '/tasks/uncomplete/' + taskId
     }).then(function(response) {
       getTasks();
     });
