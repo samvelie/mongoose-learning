@@ -30,6 +30,23 @@ myApp.controller('TaskController', ['$http', function($http){
     });
   }
 
+  self.deleteTask = function(taskId) {
+    $http({
+      method: 'DELETE',
+      url: '/tasks/' + taskId
+    }).then(function(response) {
+      getTasks();
+    });
+  }
+
+  self.completeTask = function(taskId) {
+    $http({
+      method: 'PUT',
+      url: '/tasks/' + taskId
+    }).then(function(response) {
+      getTasks();
+    });
+  }
 
 
 }]);
