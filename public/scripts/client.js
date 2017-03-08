@@ -15,7 +15,9 @@ myApp.config(['$routeProvider', function($routeProvider) {
       controllerAs: 'tc'
     })
     .when('/about', {
-      templateUrl: '/views/about.html'
+      templateUrl: '/views/about.html',
+      controller: 'AboutController',
+      controllerAs: 'ac'
     })
     .otherwise({
       redirectTo: 'home'
@@ -26,6 +28,12 @@ myApp.controller('HomeController', function(){
   console.log('Home Controller was loaded');
   var self = this;
   self.someMessage = 'This site is amazing!!';
+});
+
+myApp.controller('AboutController', function(){
+  console.log('About Controller was loaded');
+  var self = this;
+  self.listOfPeople = ['Phil', 'Tom', 'Jeremy', 'Celina', 'Kris'];
 });
 
 myApp.controller('TaskController', ['$http', function($http){
