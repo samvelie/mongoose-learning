@@ -5,15 +5,28 @@ console.log(myApp);
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/home', {
-      templateUrl: '/views/home.html'
+      templateUrl: '/views/home.html',
+      controller: 'HomeController',
+      controllerAs: 'hc'
     })
     .when('/todoList', {
-      templateUrl: '/views/todoList.html'
+      templateUrl: '/views/todoList.html',
+      controller: 'TaskController',
+      controllerAs: 'tc'
+    })
+    .when('/about', {
+      templateUrl: '/views/about.html'
     })
     .otherwise({
       redirectTo: 'home'
     })
 }]);
+
+myApp.controller('HomeController', function(){
+  console.log('Home Controller was loaded');
+  var self = this;
+  self.someMessage = 'This site is amazing!!';
+});
 
 myApp.controller('TaskController', ['$http', function($http){
   console.log('The TaskController was loaded');
