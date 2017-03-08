@@ -6,10 +6,11 @@
   <script src="vendors/angular.min.js" charset="utf-8"></script>
   <script src="vendors/angular-route.min.js" charset="utf-8"></script>
   <script src="scripts/client.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="vendors/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body ng-app="TaskApp" ng-controller="TaskController as tc">
-  <header ng-include="'/views/templates/header.html'"></header>
+  <header class="jumbotron text-center" ng-include="'/views/templates/header.html'"></header>
   <nav ng-include="'/views/templates/nav.html'"></nav>
   <main ng-view></main>
 </body>
