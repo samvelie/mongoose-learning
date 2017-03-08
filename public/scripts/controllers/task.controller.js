@@ -2,8 +2,6 @@ myApp.controller('TaskController', ['$http', 'TaskFactory', function($http, Task
   console.log('The TaskController was loaded');
   var self = this;
   self.newTask = {};
-  self.someThingToGoOnTheView = TaskFactory.testProperty;
-  self.someRandomArray = TaskFactory.testArray;
   self.taskList = TaskFactory.allTasks;
 
   // TaskFactory.allTasks = {
