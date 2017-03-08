@@ -1,20 +1,18 @@
-myApp.controller('TaskController', ['$http', function($http){
+myApp.controller('TaskController', ['$http', 'TaskFactory', function($http, TaskFactory){
   console.log('The TaskController was loaded');
   var self = this;
   self.newTask = {};
-  self.taskList = [];
+  self.someThingToGoOnTheView = TaskFactory.testProperty;
+  self.someRandomArray = TaskFactory.testArray;
+  self.taskList = TaskFactory.allTasks;
 
-  getTasks();
+  // TaskFactory.allTasks = {
+  //   list: [{name: 'sleep', id: 1}, {name: 'wake up', id: 2}]
+  // }
 
-  function getTasks() {
-    $http({
-      method: 'GET',
-      url: '/tasks'
-    }).then(function(response) {
-      console.log(response.data);
-      self.taskList = response.data;
-    });
-  }
+  // self.taskList = {
+  //   list: [{name: 'sleep', id: 1}, {name: 'wake up', id: 2}]
+  // }
 
   self.addTask = function() {
     $http({
@@ -23,7 +21,7 @@ myApp.controller('TaskController', ['$http', function($http){
       data: self.newTask
     }).then(function(response){
       console.log(response);
-      getTasks();
+      TaskFactory.updateTasks();
       self.newTask = {};
     });
   }
@@ -33,7 +31,7 @@ myApp.controller('TaskController', ['$http', function($http){
       method: 'DELETE',
       url: '/tasks/' + taskId
     }).then(function(response) {
-      getTasks();
+      TaskFactory.updateTasks();
     });
   }
 
@@ -42,7 +40,7 @@ myApp.controller('TaskController', ['$http', function($http){
       method: 'PUT',
       url: '/tasks/complete/' + taskId
     }).then(function(response) {
-      getTasks();
+      TaskFactory.updateTasks();
     });
   }
 
@@ -51,7 +49,7 @@ myApp.controller('TaskController', ['$http', function($http){
       method: 'PUT',
       url: '/tasks/uncomplete/' + taskId
     }).then(function(response) {
-      getTasks();
+      TaskFactory.updateTasks();
     });
   }
 
