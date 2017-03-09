@@ -33,13 +33,9 @@ myApp.controller('TaskController', ['$http', 'TaskFactory', function($http, Task
     });
   }
 
+  // self.completeTask will stay, because it's the glue between the controller and view
   self.completeTask = function(taskId) {
-    $http({
-      method: 'PUT',
-      url: '/tasks/complete/' + taskId
-    }).then(function(response) {
-      TaskFactory.updateTasks();
-    });
+    TaskFactory.completeTask(taskId);
   }
 
   self.uncompleteTask = function(taskId) {
