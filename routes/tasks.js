@@ -32,33 +32,26 @@ router.get('/', function(req, res) {
   });
 });
 //
-// // create a new task in the db
-// router.post('/', function(req, res) {
-//   console.log('hit post route');
-//   console.log('here is the body ->', req.body);
-//
-//   var taskObject = req.body;
-//
-//   // db query
-//   // INSERT INTO task (name) VALUES ('test');
-//   pool.connect(function(err, client, done) {
-//     if(err){
-//       console.log(err);
-//       res.sendStatus(500);
-//     }else{
-//       client.query('INSERT INTO task (name) VALUES ($1);',
-//         [taskObject.taskName], function(err, result) {
-//           done();
-//           if(err){
-//             console.log(err);
-//             res.sendStatus(500); // the world exploded
-//           }else{
-//             res.sendStatus(201);
-//           }
-//       });
-//     }
-//   });
-// });
+// create a new task in the db
+router.post('/', function(req, res) {
+  console.log('hit post route');
+  console.log('here is the body ->', req.body);
+
+  var taskObject = req.body;
+  var addedTask = new Task({
+    name: taskObject.taskName
+  });
+
+  // db query
+  addedTask.save(function(err, result) {
+    if(err) {
+      console.log('We got an error on post-->', err);
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(201);
+    }
+  });
+});
 //
 // // create a new task in the db
 // router.delete('/:id', function(req, res) {
