@@ -7,18 +7,18 @@ myApp.controller('TaskController', ['TaskFactory', function(TaskFactory){
 
   self.addTask = function() {
     TaskFactory.addTask(self.newTask);
-  }
+  };
 
   self.deleteTask = function(taskId) {
     TaskFactory.deleteTask(taskId);
-  }
+  };
 
   self.completeTask = function(taskId) {
     TaskFactory.completeTask(taskId);
-  }
+  };
 
   self.uncompleteTask = function(taskId) {
     TaskFactory.uncompleteTask(taskId);
-  }
+  };
 
 }]);
