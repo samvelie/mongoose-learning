@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
     }
   });
 });
-//
+
 // create a new task in the db
 router.post('/', function(req, res) {
   console.log('hit post route');
@@ -60,19 +60,18 @@ router.delete('/:id', function(req, res) {
   console.log('here is the id to delete ->', taskToDeleteId);
 
   // db query
-  Task.findByIdAndRemove({_id: taskToDeleteId},
+  Task.findByIdAndRemove(
+    {_id: taskToDeleteId},
     function(err,result) {
       if(err) {
-        console.log('Error completing task', err);
+        console.log('Error deleting task', err);
         res.sendStatus(500);
       } else {
         res.sendStatus(200);
       }
-  })
+  });
 
 });
-
-
 
 // complete a task in the db
 router.put('/complete/:id', function(req, res) {
