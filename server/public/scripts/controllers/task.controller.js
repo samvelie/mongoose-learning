@@ -7,6 +7,7 @@ myApp.controller('TaskController', ['TaskFactory', function(TaskFactory){
 
   self.addTask = function() {
     TaskFactory.addTask(self.newTask);
+    self.newTask = {};
   };
 
   self.deleteTask = function(taskId) {
@@ -19,6 +20,10 @@ myApp.controller('TaskController', ['TaskFactory', function(TaskFactory){
 
   self.uncompleteTask = function(taskId) {
     TaskFactory.uncompleteTask(taskId);
+  };
+
+  self.updateTask = function(task) {
+    TaskFactory.updateTask(task);
   };
 
 }]);

@@ -22,7 +22,8 @@ router.post('/', function(req, res) {
 
   var taskObject = req.body;
   var addedTask = new Task({
-    name: taskObject.taskName
+    name: taskObject.taskName,
+    description: taskObject.taskDescription
   });
 
   // db query
@@ -90,6 +91,30 @@ router.put('/uncomplete/:id', function(req, res) {
     function(err, result) {
       if(err) {
         console.log('Error uncompleting task', err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+//edit task in db
+router.put('/:id', function(req, res) {
+  var taskToUpdateId = req.params.id;
+  var taskObject = req.body;
+  console.log('hit update route');
+  console.log('here is the object with updated name and description ->', taskToUpdateId);
+
+  // db query
+  Task.findByIdAndUpdate(
+    {_id: taskToUpdateId},
+    {
+      $set: {name: taskObject.name, description: taskObject.description}
+    },
+    function(err, result) {
+      if(err) {
+        console.log('Error completing task:', err);
         res.sendStatus(500);
       } else {
         res.sendStatus(200);

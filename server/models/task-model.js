@@ -7,6 +7,7 @@ mongoose.model(
   'Task',
   new Schema({
     "name": String,
+    "description": String,
     "status" : { type: Boolean, default: false }
   },
   {
